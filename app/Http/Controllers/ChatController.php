@@ -87,8 +87,8 @@ class ChatController extends Controller
         // we can get the model from user
         // $engine = 'gpt-3.5-turbo'; //$request->engine ?? 'gpt-3.5-turbo';
         // $engine = 'gpt-4-turbo-preview'; //$request->engine ?? 'gpt-3.5-turbo';
-        $engine = 'gpt-4o-2024-08-06'; //$request->engine ?? 'gpt-3.5-turbo';
-        // $engine = 'gpt-4o'; //$request->engine ?? 'gpt-3.5-turbo';
+        // $engine = 'gpt-4o-2024-08-06'; //$request->engine ?? 'gpt-3.5-turbo';
+        $engine = 'gpt-4o'; //$request->engine ?? 'gpt-3.5-turbo';
         // $engine = 'gpt-4o-mini'; //$request->engine ?? 'gpt-3.5-turbo';
 
         $chat = Chat::find($chatId);
@@ -121,6 +121,7 @@ class ChatController extends Controller
         ]);
 
         $payload = Message::where('chat_id', $chat->id)->get(['role', 'content'])->toArray();
+        // info('payloaddddddd: '. json_encode($payload));
 
         $client = OpenAI::client(config('app.open_ai_api_key'));
         // $response = $client->chat()->create([
